@@ -3,18 +3,18 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:recipe/pages/authentication/repo/repository.dart';
-import 'package:recipe/pages/authentication/utils/alert_dialog.dart';
 
+import '../utils/alert_dialog.dart';
 import '../utils/exceptions.dart';
 
-class SignUpPage extends StatefulWidget {
-  const SignUpPage({Key? key}) : super(key: key);
+class LogInPage extends StatefulWidget {
+  const LogInPage({Key? key}) : super(key: key);
 
   @override
-  State<SignUpPage> createState() => _SignUpPageState();
+  State<LogInPage> createState() => _LogInPageState();
 }
 
-class _SignUpPageState extends State<SignUpPage> {
+class _LogInPageState extends State<LogInPage> {
   bool onChanged = false;
   final TextEditingController _email = TextEditingController();
   final TextEditingController _password = TextEditingController();
@@ -36,7 +36,7 @@ class _SignUpPageState extends State<SignUpPage> {
               decoration: const BoxDecoration(
                 image: DecorationImage(
                     image: AssetImage(
-                      ('asset/sign in.png'),
+                      ('asset/login.png'),
                     ),
                     fit: BoxFit.cover),
               ),
@@ -45,7 +45,7 @@ class _SignUpPageState extends State<SignUpPage> {
               height: MediaQuery.of(context).size.height * .02,
             ),
             const Text(
-              'Welcome',
+              'Hello User',
               style: TextStyle(
                 fontWeight: FontWeight.w700,
               ),
@@ -58,7 +58,6 @@ class _SignUpPageState extends State<SignUpPage> {
               padding: const EdgeInsets.all(30),
               height: MediaQuery.of(context).size.height * .30,
               width: MediaQuery.of(context).size.width * .90,
-              color: Colors.transparent,
               child: Column(
                 children: [
                   TextField(
@@ -100,12 +99,27 @@ class _SignUpPageState extends State<SignUpPage> {
                       ),
                     ),
                   ),
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height * .06,
+                  // SizedBox(
+                  //   height: MediaQuery.of(context).size.height * .06,
+                  // ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      TextButton(
+                        onPressed: () {
+                          Navigator.of(context).pushNamedAndRemoveUntil('/reset_pass/', (route) => false);
+                        },
+                        child: const Text(
+                          'Forget Password?',
+                          style: TextStyle(
+                            color: Colors.blueGrey,
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                   Material(
-                    borderRadius:
-                        BorderRadius.circular(onChanged ? 150 : 10),
+                    borderRadius: BorderRadius.circular(onChanged ? 150 : 10),
                     color: onChanged
                         ? Colors.lightBlueAccent.shade200
                         : Colors.grey.shade200,
@@ -114,30 +128,23 @@ class _SignUpPageState extends State<SignUpPage> {
                         setState(() {
                           onChanged = true;
                         });
-                        await Future.delayed(
-                            const Duration(milliseconds: 500));
+                        await Future.delayed(const Duration(milliseconds: 500));
                         final email = _email.text.trim();
                         final password = _password.text;
                         final firebaseUser = FirebaseUser();
                         // ignore: duplicate_ignore, duplicate_ignore
                         try {
-                          await firebaseUser.createUser(
+                          await firebaseUser.logInUser(
                               email: email, password: password);
                           final user = FirebaseAuth.instance.currentUser;
                           if (user != null) {
-                            await user.sendEmailVerification();
-                            showEmailVerificationDialog(context,
-                                'Email verification link is sent to your Email');
-                            setState(() {
-                              onChanged = false;
-                            });
+                            Navigator.of(context).pushNamedAndRemoveUntil(
+                                '/homepage/', (route) => false);
                           }
-                          // ignore: use_build_context_synchronously
-                          Navigator.of(context).pushNamed('/email_verify/');
-                        } on WeakPasswordAuthException catch (_) {
-                          showErrorDialog(context, 'Password Is Too Weak');
-                        } on EmailAlreadyInUseAuthException catch (_) {
-                          showErrorDialog(context, 'Email Already In Use.');
+                        } on UserNotFoundAuthException catch (_) {
+                          showErrorDialog(context, 'User Not Found.');
+                        } on WrongPasswordAuthException catch (_) {
+                          showErrorDialog(context, 'Wrong Password.');
                         } on InvalidEmailAuthException catch (_) {
                           showErrorDialog(context, 'Invalid Email');
                         } on GenericAuthException catch (_) {
@@ -162,7 +169,7 @@ class _SignUpPageState extends State<SignUpPage> {
                               )
                             : const Center(
                                 child: Text(
-                                  'Sign in',
+                                  'Login',
                                   style: TextStyle(
                                     fontWeight: FontWeight.w700,
                                   ),
@@ -178,15 +185,20 @@ class _SignUpPageState extends State<SignUpPage> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Text('Already Registered? Login here ->',
-                  style: TextStyle(
-                      fontWeight: FontWeight.w700
-                  ),
-                  textScaleFactor: 1.5,),
-                TextButton(onPressed: (){
-                  Navigator.of(context).pushNamedAndRemoveUntil('/logging/', (route) => false);
-                },
-                    child: const Text('Login!',textScaleFactor: 1.5,))
+                const Text(
+                  'Not Registered? Sign-up here ->',
+                  style: TextStyle(fontWeight: FontWeight.w700),
+                  textScaleFactor: 1.5,
+                ),
+                TextButton(
+                    onPressed: () {
+                      Navigator.of(context).pushNamedAndRemoveUntil(
+                          '/signing/', (route) => false);
+                    },
+                    child: const Text(
+                      'Sign-up!',
+                      textScaleFactor: 1.5,
+                    ))
               ],
             )
           ],
