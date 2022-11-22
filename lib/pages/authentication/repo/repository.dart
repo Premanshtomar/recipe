@@ -14,7 +14,7 @@ class FirebaseUser {
       if (e.code == 'weak-password') {
         throw WeakPasswordAuthException();
       } else if (e.code == 'email-already-in-use') {
-        throw EmailAlreadyInUseAuthException;
+        throw EmailAlreadyInUseAuthException();
       } else if (e.code == 'invalid-email') {
         throw InvalidEmailAuthException();
       } else {
@@ -44,7 +44,7 @@ class FirebaseUser {
 
   Future<void> forgetPassword({required String email}) async {
     try {
-      FirebaseAuth.instance.sendPasswordResetEmail(email: email);
+      await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         throw UserNotFoundAuthException();

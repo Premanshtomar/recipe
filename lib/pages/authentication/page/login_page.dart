@@ -54,9 +54,9 @@ class _LogInPageState extends State<LogInPage> {
             SizedBox(
               height: MediaQuery.of(context).size.height * .02,
             ),
+            // ignore: sized_box_for_whitespace
             Container(
-              padding: const EdgeInsets.all(30),
-              height: MediaQuery.of(context).size.height * .30,
+              height: MediaQuery.of(context).size.height * .35,
               width: MediaQuery.of(context).size.width * .90,
               child: Column(
                 children: [
@@ -99,15 +99,13 @@ class _LogInPageState extends State<LogInPage> {
                       ),
                     ),
                   ),
-                  // SizedBox(
-                  //   height: MediaQuery.of(context).size.height * .06,
-                  // ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       TextButton(
                         onPressed: () {
-                          Navigator.of(context).pushNamedAndRemoveUntil('/reset_pass/', (route) => false);
+                          Navigator.of(context).pushNamedAndRemoveUntil(
+                              '/reset_pass/', (route) => false);
                         },
                         child: const Text(
                           'Forget Password?',
@@ -159,7 +157,7 @@ class _LogInPageState extends State<LogInPage> {
                         width: onChanged
                             ? MediaQuery.of(context).size.width * 0.12
                             : MediaQuery.of(context).size.width * 0.4,
-                        height: MediaQuery.of(context).size.width * 0.11,
+                        height: MediaQuery.of(context).size.width * 0.14,
                         duration: const Duration(milliseconds: 500),
                         child: onChanged
                             ? const Icon(
@@ -182,13 +180,13 @@ class _LogInPageState extends State<LogInPage> {
                 ],
               ),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+            Column(
               children: [
                 const Text(
-                  'Not Registered? Sign-up here ->',
-                  style: TextStyle(fontWeight: FontWeight.w700),
-                  textScaleFactor: 1.5,
+                  'Not Registered?Sign-up here->',
+                  style: TextStyle(
+                      fontWeight: FontWeight.w700, color: Colors.blueGrey),
+                  textScaleFactor: 1,
                 ),
                 TextButton(
                     onPressed: () {
@@ -197,8 +195,11 @@ class _LogInPageState extends State<LogInPage> {
                     },
                     child: const Text(
                       'Sign-up!',
+                      style: TextStyle(
+                        color: Colors.deepPurple,
+                      ),
                       textScaleFactor: 1.5,
-                    ))
+                    )),
               ],
             )
           ],

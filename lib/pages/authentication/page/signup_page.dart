@@ -55,10 +55,10 @@ class _SignUpPageState extends State<SignUpPage> {
               height: MediaQuery.of(context).size.height * .02,
             ),
             Container(
-              padding: const EdgeInsets.all(30),
-              height: MediaQuery.of(context).size.height * .30,
+              // padding: const EdgeInsets.all(30),
+              height: MediaQuery.of(context).size.height * .31,
               width: MediaQuery.of(context).size.width * .90,
-              color: Colors.transparent,
+              // color: Colors.red,
               child: Column(
                 children: [
                   TextField(
@@ -101,11 +101,10 @@ class _SignUpPageState extends State<SignUpPage> {
                     ),
                   ),
                   SizedBox(
-                    height: MediaQuery.of(context).size.height * .06,
+                    height: MediaQuery.of(context).size.height * .015,
                   ),
                   Material(
-                    borderRadius:
-                        BorderRadius.circular(onChanged ? 150 : 10),
+                    borderRadius: BorderRadius.circular(onChanged ? 150 : 10),
                     color: onChanged
                         ? Colors.lightBlueAccent.shade200
                         : Colors.grey.shade200,
@@ -114,8 +113,7 @@ class _SignUpPageState extends State<SignUpPage> {
                         setState(() {
                           onChanged = true;
                         });
-                        await Future.delayed(
-                            const Duration(milliseconds: 500));
+                        await Future.delayed(const Duration(milliseconds: 500));
                         final email = _email.text.trim();
                         final password = _password.text;
                         final firebaseUser = FirebaseUser();
@@ -152,7 +150,7 @@ class _SignUpPageState extends State<SignUpPage> {
                         width: onChanged
                             ? MediaQuery.of(context).size.width * 0.12
                             : MediaQuery.of(context).size.width * 0.4,
-                        height: MediaQuery.of(context).size.width * 0.11,
+                        height: MediaQuery.of(context).size.width * 0.14,
                         duration: const Duration(milliseconds: 500),
                         child: onChanged
                             ? const Icon(
@@ -175,18 +173,26 @@ class _SignUpPageState extends State<SignUpPage> {
                 ],
               ),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+            Column(
               children: [
-                const Text('Already Registered? Login here ->',
+                const Text(
+                  'Already Registered?Login here->',
                   style: TextStyle(
-                      fontWeight: FontWeight.w700
-                  ),
-                  textScaleFactor: 1.5,),
-                TextButton(onPressed: (){
-                  Navigator.of(context).pushNamedAndRemoveUntil('/logging/', (route) => false);
-                },
-                    child: const Text('Login!',textScaleFactor: 1.5,))
+                      fontWeight: FontWeight.w700, color: Colors.blueGrey),
+                  textScaleFactor: 1,
+                ),
+                TextButton(
+                    onPressed: () {
+                      Navigator.of(context).pushNamedAndRemoveUntil(
+                          '/logging/', (route) => false);
+                    },
+                    child: const Text(
+                      'Login!',
+                      style: TextStyle(
+                        color: Colors.deepPurple,
+                      ),
+                      textScaleFactor: 1.5,
+                    )),
               ],
             )
           ],

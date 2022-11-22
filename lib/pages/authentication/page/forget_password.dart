@@ -5,6 +5,7 @@ import 'package:recipe/pages/authentication/utils/alert_dialog.dart';
 
 import '../repo/repository.dart';
 import '../utils/exceptions.dart';
+
 class ForgetPassword extends StatefulWidget {
   const ForgetPassword({Key? key}) : super(key: key);
 
@@ -30,30 +31,22 @@ class _ForgetPasswordState extends State<ForgetPassword> {
               alignment: Alignment.center,
               decoration: const BoxDecoration(
                   image: DecorationImage(
-                  image: AssetImage('asset/forget.png'),
-                  fit: BoxFit.cover,
-
-                )
-              ),
+                image: AssetImage('asset/forget.png'),
+                fit: BoxFit.cover,
+              )),
             ),
-            SizedBox(
-              height: MediaQuery.of(context).size.height*0.002,
-            ),
-            const Text('Forget Password?',
-            style: TextStyle(
-              fontWeight: FontWeight.w700
-            ),
+            const Text(
+              'Forget Password?',
+              style: TextStyle(fontWeight: FontWeight.w700),
               textScaleFactor: 2,
             ),
-            const Text("Don't worry it happens!",
-              style: TextStyle(
-                  fontWeight: FontWeight.w700),
+            const Text(
+              "Don't worry it happens!",
+              style: TextStyle(fontWeight: FontWeight.w700),
             ),
-            SizedBox(height: MediaQuery.of(context).size.width*0.04,),
-            const Text('Enter your Email so we can help you!',
-            style: TextStyle(
-              fontWeight: FontWeight.w700
-            ),
+            const Text(
+              'Enter your Email so we can help you!',
+              style: TextStyle(fontWeight: FontWeight.w700),
               textScaleFactor: 2.75,
             ),
             Container(
@@ -79,10 +72,11 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                       ),
                     ),
                   ),
-                  SizedBox(height: MediaQuery.of(context).size.height*0.02,),
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.02,
+                  ),
                   Material(
-                    borderRadius:
-                    BorderRadius.circular(onChanged ? 150 : 10),
+                    borderRadius: BorderRadius.circular(onChanged ? 150 : 10),
                     color: onChanged
                         ? Colors.lightBlueAccent.shade200
                         : Colors.grey.shade200,
@@ -91,25 +85,25 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                         setState(() {
                           onChanged = true;
                         });
-                        await Future.delayed(
-                            const Duration(milliseconds: 500));
+                        await Future.delayed(const Duration(milliseconds: 500));
                         final email = _email.text.trim();
                         final firebaseUser = FirebaseUser();
                         try {
                           await firebaseUser.forgetPassword(email: email);
-                          if (FirebaseAuth.instance.currentUser!= null){
+                          if (FirebaseAuth.instance.currentUser != null) {
+                            // ignore: use_build_context_synchronously
                             showErrorDialog(context, 'text');
                           }
-                            setState(() {
-                              onChanged = false;
-                            });
-                          }on UserNotFoundAuthException catch (_){
+                          setState(() {
+                            onChanged = false;
+                          });
+                        } on UserNotFoundAuthException catch (_) {
                           // ignore: use_build_context_synchronously
                           showErrorDialog(context, 'User Not Found');
-                        }on InvalidEmailAuthException catch(_){
+                        } on InvalidEmailAuthException catch (_) {
                           // ignore: use_build_context_synchronously
                           showErrorDialog(context, 'Invalid Email Address');
-                        }on GenericAuthException catch (_){
+                        } on GenericAuthException catch (_) {
                           // ignore: use_build_context_synchronously
                           showErrorDialog(context, 'Authentication Error');
                         }
@@ -122,41 +116,39 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                         // alignment: Alignment.center,
                         width: onChanged
                             ? MediaQuery.of(context).size.width * 0.12
-                            : MediaQuery.of(context).size.width * 0.4,
-                        height: MediaQuery.of(context).size.width * 0.11,
+                            : MediaQuery.of(context).size.width * 0.5,
+                        height: MediaQuery.of(context).size.width * 0.13,
                         duration: const Duration(milliseconds: 500),
                         child: onChanged
                             ? const Icon(
-                          Icons.done,
-                          color: Colors.black,
-                          size: 50,
-                        )
+                                Icons.done,
+                                color: Colors.black,
+                                size: 50,
+                              )
                             : const Center(
-                          child: Text(
-                            'Send link',
-                            style: TextStyle(
-                              fontWeight: FontWeight.w700,
-                            ),
-                            textScaleFactor: 3,
-                          ),
-                        ),
+                                child: Text(
+                                  'Send link',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.w700,
+                                  ),
+                                  textScaleFactor: 3,
+                                ),
+                              ),
                       ),
                     ),
                   )
                 ],
               ),
-
-              // height: MediaQuery.of(context).size.height*0.2,
-              // width: MediaQuery.of(context).size.width*0.75,
             ),
-
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+            Column(
               children: [
                 const Text(
-                  'Click here to Login here ->',
-                  style: TextStyle(fontWeight: FontWeight.w700),
-                  textScaleFactor: 1.5,
+                  'Click here to Login->',
+                  style: TextStyle(
+                    fontWeight: FontWeight.w700,
+                    color: Colors.blueGrey,
+                  ),
+                  textScaleFactor: 1,
                 ),
                 TextButton(
                     onPressed: () {
@@ -165,12 +157,13 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                     },
                     child: const Text(
                       'Login!',
+                      style: TextStyle(
+                        color: Colors.deepPurple,
+                      ),
                       textScaleFactor: 1.5,
-                    ))
+                    )),
               ],
             ),
-
-
           ],
         ),
       ),
