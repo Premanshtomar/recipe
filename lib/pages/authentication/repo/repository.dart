@@ -1,7 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 
-import '../utils/exceptions.dart';
-
+import '../../../utils/exceptions.dart';
 class FirebaseUser {
   Future<void> createUser(
       {required String email, required String password}) async {

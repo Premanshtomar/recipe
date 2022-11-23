@@ -4,8 +4,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:recipe/pages/authentication/repo/repository.dart';
 
-import '../utils/alert_dialog.dart';
-import '../utils/exceptions.dart';
+import '../../../utils/alert_dialog.dart';
+import '../../../utils/exceptions.dart';
 
 class LogInPage extends StatefulWidget {
   const LogInPage({Key? key}) : super(key: key);

@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:recipe/pages/authentication/page/forget_password.dart';
 import 'package:recipe/pages/authentication/page/login_page.dart';
 import 'package:recipe/pages/authentication/page/signup_page.dart';
+import 'package:recipe/pages/details/details.dart';
 import 'package:recipe/pages/home/pages/home_page.dart';
 
 // import 'package:firebase_core/firebase_core.dart';
@@ -27,10 +28,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-        home: const SignUpPage(),
+        home: const HomePage()  ,
     routes:{'/homepage/' : (context) => const HomePage(),
       '/logging/': (context)=> const LogInPage(),
       '/signing/': (context)=> const SignUpPage(),
       '/reset_pass/': ( context)=> const ForgetPassword(),
+      '/details/': ( context)=> const Details(),
   });
 }}

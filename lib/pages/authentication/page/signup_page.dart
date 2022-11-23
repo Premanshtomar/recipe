@@ -3,9 +3,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:recipe/pages/authentication/repo/repository.dart';
-import 'package:recipe/pages/authentication/utils/alert_dialog.dart';
-
-import '../utils/exceptions.dart';
+import '../../../utils/alert_dialog.dart';
+import '../../../utils/exceptions.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({Key? key}) : super(key: key);

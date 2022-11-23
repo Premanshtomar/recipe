@@ -1,11 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:recipe/pages/authentication/utils/alert_dialog.dart';
-
+import '../../../utils/alert_dialog.dart';
+import '../../../utils/exceptions.dart';
 import '../repo/repository.dart';
-import '../utils/exceptions.dart';
-
 class ForgetPassword extends StatefulWidget {
   const ForgetPassword({Key? key}) : super(key: key);
 
