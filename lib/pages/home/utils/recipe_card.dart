@@ -1,15 +1,19 @@
 import 'package:flutter/material.dart';
+
 class RecipeCard extends StatelessWidget {
   final String title;
   final String rating;
   final String cookTime;
   final String thumbnailUrl;
-  const RecipeCard({super.key,
+
+  const RecipeCard({
+    super.key,
     required this.title,
     required this.cookTime,
     required this.rating,
     required this.thumbnailUrl,
   });
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -47,10 +51,7 @@ class RecipeCard extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 5.0),
               child: Text(
                 title,
-                style: const TextStyle(
-                  fontSize: 19,
-                  color: Colors.white
-                ),
+                style: const TextStyle(fontSize: 19, color: Colors.white),
                 overflow: TextOverflow.ellipsis,
                 maxLines: 2,
                 textAlign: TextAlign.center,
@@ -77,9 +78,10 @@ class RecipeCard extends StatelessWidget {
                         size: 18,
                       ),
                       const SizedBox(width: 7),
-                      Text(rating,style: const TextStyle(
-                          color: Colors.white
-                      ),),
+                      Text(
+                        rating,
+                        style: const TextStyle(color: Colors.white),
+                      ),
                     ],
                   ),
                 ),
@@ -98,9 +100,10 @@ class RecipeCard extends StatelessWidget {
                         size: 18,
                       ),
                       const SizedBox(width: 7),
-                      Text(cookTime,style: const TextStyle(
-                        color: Colors.white
-                      ),),
+                      Text(
+                        cookTime,
+                        style: const TextStyle(color: Colors.white),
+                      ),
                     ],
                   ),
                 )

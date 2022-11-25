@@ -69,7 +69,8 @@ class _HomePageState extends State<HomePage> {
                       //         Details(recipe: _recipes[index]),
                       //   ),
                       // );
-                      Navigator.pushNamed(context, Details.routeName, arguments: _recipes[index]);
+                      Navigator.pushNamed(context, Details.routeName,
+                          arguments: _recipes[index]);
                     },
                     child: RecipeCard(
                         title: _recipes[index].name,

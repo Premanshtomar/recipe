@@ -5,7 +5,7 @@ import 'package:recipe/utils/alert_dialog.dart';
 
 class MyDrawer extends StatelessWidget {
   MyDrawer({Key? key}) : super(key: key);
-  final email = FirebaseAuth.instance.currentUser?.displayName;
+  final email = FirebaseAuth.instance.currentUser?.email;
   final imageUrl =
       'https://images.unsplash.com/photo-1511367461989-f85a21fda167?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8cHJvZmlsZXxlbnwwfHwwfHw%3D&w=1000&q=80';
 
@@ -18,22 +18,22 @@ class MyDrawer extends StatelessWidget {
         padding: EdgeInsets.zero,
         children: [
           DrawerHeader(
-              padding: EdgeInsets.zero,
-              child: UserAccountsDrawerHeader(
-                currentAccountPicture: CircleAvatar(
-                  backgroundImage: NetworkImage(imageUrl),
-                ),
-                decoration: const BoxDecoration(color: Colors.white),
-                margin: EdgeInsets.zero,
-                accountName: Text(
-                  email ?? 'Not logged in',
-                  textScaleFactor: 1.5,
-                  style: const TextStyle(
-                    color: Colors.black,
-                  ),
-                ),
-                accountEmail: null,
+            padding: EdgeInsets.zero,
+            child: UserAccountsDrawerHeader(
+              currentAccountPicture: CircleAvatar(
+                backgroundImage: NetworkImage(imageUrl),
               ),
+              decoration: const BoxDecoration(color: Colors.white),
+              margin: EdgeInsets.zero,
+              accountName: Text(
+                email ?? 'Not logged in',
+                textScaleFactor: 1.5,
+                style: const TextStyle(
+                  color: Colors.black,
+                ),
+              ),
+              accountEmail: null,
+            ),
           ),
           ListTile(
             onTap: () {

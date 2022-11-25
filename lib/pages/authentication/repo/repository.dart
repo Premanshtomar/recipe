@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 
 import '../../../utils/exceptions.dart';
+
 class FirebaseUser {
   Future<void> createUser(
       {required String email, required String password}) async {
@@ -49,10 +50,10 @@ class FirebaseUser {
         throw UserNotFoundAuthException();
       } else if (e.code == 'invalid-email') {
         throw InvalidEmailAuthException();
-      }else{
+      } else {
         throw GenericAuthException();
       }
-    }catch(_){
+    } catch (_) {
       throw GenericAuthException();
     }
   }

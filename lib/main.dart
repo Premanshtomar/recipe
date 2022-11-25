@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -11,28 +12,28 @@ import 'package:recipe/pages/home/pages/home_page.dart';
 void main() async {
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
       statusBarColor: Colors.transparent,
-      statusBarIconBrightness: Brightness.dark
-
-  ));
+      statusBarIconBrightness: Brightness.dark));
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   runApp(const MyApp());
 }
 
-
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
-
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
-        home: const HomePage()  ,
-    routes:{'/homepage/' : (context) => const HomePage(),
-      '/logging/': (context)=> const LogInPage(),
-      '/signing/': (context)=> const SignUpPage(),
-      '/reset_pass/': ( context)=> const ForgetPassword(),
-      '/details/': ( context)=> const Details(),
-  });
-}}
+        debugShowCheckedModeBanner: false,
+        home: FirebaseAuth.instance.currentUser != null
+            ? const HomePage()
+            : const LogInPage(),
+        routes: {
+          '/homepage/': (context) => const HomePage(),
+          '/logging/': (context) => const LogInPage(),
+          '/signing/': (context) => const SignUpPage(),
+          '/reset_pass/': (context) => const ForgetPassword(),
+          '/details/': (context) => const Details(),
+        });
+  }
+}

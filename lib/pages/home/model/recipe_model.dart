@@ -3,18 +3,21 @@ class Recipe {
   final String images;
   final double rating;
   final String totalTime;
-  final List preparation;
+  final List? preparation;
+  final String? description;
 
   Recipe(
       {required this.name,
       required this.images,
       required this.rating,
       required this.totalTime,
-      this.preparation = const []});
+      this.preparation = const [''],
+      this.description = 'No Description Available'});
 
   factory Recipe.fromJson(dynamic json) {
     return Recipe(
-        preparation: json['preparationSteps'] as List,
+        description: json['description']?['text'] as String?,
+        preparation: json['preparationSteps'] as List?,
         name: json['details']?['name'] as String,
         images: json['details']['images'][0]['hostedLargeUrl'] as String,
         rating: json['details']['rating'] as double,
@@ -26,9 +29,4 @@ class Recipe {
       return Recipe.fromJson(data);
     }).toList();
   }
-
-// @override
-// String toString(){
-//   return 'Recipe {name: $name, image: $images, rating: $rating, totalTime: $totalTime}';
-// }
 }

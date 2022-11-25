@@ -73,7 +73,7 @@ class _LogInPageState extends State<LogInPage> {
                       fillColor: Colors.grey,
                       filled: true,
                       label: const Text(
-                        'Username',
+                        'Email',
                         style: TextStyle(fontWeight: FontWeight.w700),
                       ),
                     ),
@@ -135,9 +135,13 @@ class _LogInPageState extends State<LogInPage> {
                           await firebaseUser.logInUser(
                               email: email, password: password);
                           final user = FirebaseAuth.instance.currentUser;
-                          if (user != null) {
+                          if (user != null && user.emailVerified) {
                             Navigator.of(context).pushNamedAndRemoveUntil(
                                 '/homepage/', (route) => false);
+                          } else {
+                            user?.sendEmailVerification();
+                            showEmailVerificationDialog(context,
+                                'Email verification link is sent to your email address');
                           }
                         } on UserNotFoundAuthException catch (_) {
                           showErrorDialog(context, 'User Not Found.');
