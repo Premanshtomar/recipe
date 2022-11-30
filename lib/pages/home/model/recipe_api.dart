@@ -18,6 +18,7 @@ class RecipeApi {
 
     for (var i in data['feed']) {
       temp.add(i['content']);
+      if ( temp.length == 14) break;
     }
 
     // print(temp);

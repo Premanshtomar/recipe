@@ -20,9 +20,15 @@ class Details extends StatelessWidget {
             // backgroundColor: Colors.red,
             expandedHeight: MediaQuery.of(context).size.height * 0.25,
             flexibleSpace: FlexibleSpaceBar(
-              title: Text(
-                recipe?.name ?? '',
-                style: const TextStyle(color: Colors.white),
+              title: LayoutBuilder(
+                builder: (context, constraints) {
+                  return Text(
+                    recipe?.name??'',
+                    style:TextStyle(
+                      color: constraints.maxHeight > MediaQuery.of(context).size.height*0.14 ? Colors.white : Colors.black,
+                    ),
+                  );
+                },
               ),
               background: Image.network(
                 recipe!.images,
@@ -63,35 +69,54 @@ class Details extends StatelessWidget {
                   ),
                   Container(
                     // color: Colors.yellow,
-                    margin: const EdgeInsets.fromLTRB(5, 10, 5, 10),
+                    // margin: const EdgeInsets.fromLTRB(0, 10, 0, 10),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        const Text(
-                          'Preparation Steps:',
-                          style: TextStyle(fontWeight: FontWeight.w700),
-                          textScaleFactor: 1.5,
+                        const Padding(
+                          padding: EdgeInsets.only(left: 16.0),
+                          child: Text(
+                            'Preparation Steps:',
+                            style: TextStyle(fontWeight: FontWeight.w700),
+                            textScaleFactor: 1.5,
+                          ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 16),
-                          child: ListView.builder(
-                            physics: const NeverScrollableScrollPhysics(),
-                            shrinkWrap: true,
-                            itemCount: recipe.preparation?.length,
-                            itemBuilder: (BuildContext context, int index1) {
-                              return Container(
-                                margin: const EdgeInsets.only(bottom: 20),
+                        ListView.builder(
+                          physics: const NeverScrollableScrollPhysics(),
+                          shrinkWrap: true,
+                          itemCount: recipe.preparation?.length,
+                          itemBuilder: (BuildContext context, int index1) {
+                            return Container(
+                                padding: EdgeInsets.fromLTRB(
+                                    32,
+                                    8,
+                                    8,
+                                    index1 == (recipe.preparation!.length - 1)
+                                        ? 24
+                                        : 8),
                                 color: index1.isOdd
                                     ? Colors.white
                                     : Colors.black12,
-                                child: Text(
-                                  'Step${index1 + 1}\n ${recipe.preparation?[index1]}',
-                                  textScaleFactor: 1.4,
-                                ),
-                              );
-                            },
-                          ),
+                                child: RichText(
+                                  text: TextSpan(
+                                      text: 'Step ${index1 + 1}.\n',
+                                      style: const TextStyle(
+                                          fontWeight: FontWeight.w700,
+                                          color: Colors.black,
+                                          fontSize: 20),
+                                      children: [
+                                        TextSpan(
+                                          text:
+                                              '${recipe.preparation?[index1]}',
+                                          style: const TextStyle(
+                                            fontWeight: FontWeight.normal,
+                                            fontSize: 18,
+                                          ),
+                                        ),
+                                      ]),
+                                ));
+                          },
                         )
                       ],
                     ),

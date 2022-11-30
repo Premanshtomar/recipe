@@ -11,7 +11,7 @@ class Recipe {
       required this.images,
       required this.rating,
       required this.totalTime,
-      this.preparation = const [''],
+      this.preparation = const [],
       this.description = 'No Description Available'});
 
   factory Recipe.fromJson(dynamic json) {
