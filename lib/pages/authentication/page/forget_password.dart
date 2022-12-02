@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -90,10 +89,12 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                         final firebaseUser = FirebaseUser();
                         try {
                           await firebaseUser.forgetPassword(email: email);
-                          if (FirebaseAuth.instance.currentUser != null) {
-                            // ignore: use_build_context_synchronously
-                            showErrorDialog(context, 'text');
-                          }
+                          showErrorDialog(context,
+                              'Password reset link is sent to your Email.');
+                          // if (FirebaseAuth.instance.currentUser != null) {
+                          //   // ignore: use_build_context_synchronously
+                          //   showErrorDialog(context, 'Password reset link is sent to your Email.');
+                          // }
                           setState(() {
                             onChanged = false;
                           });
