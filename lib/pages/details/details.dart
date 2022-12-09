@@ -1,11 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:recipe/pages/home/model/recipe_model.dart';
 
-class Details extends StatelessWidget {
+class Details extends StatefulWidget {
   static const String routeName = '/details/';
 
   // final Recipe? recipe;
   const Details({Key? key}) : super(key: key);
+
+  @override
+  State<Details> createState() => _DetailsState();
+}
+
+class _DetailsState extends State<Details> {
+  var systemDark = true;
 
   @override
   Widget build(BuildContext context) {
@@ -17,15 +25,36 @@ class Details extends StatelessWidget {
             backgroundColor: Colors.white,
             foregroundColor: Colors.black,
             pinned: true,
+            systemOverlayStyle: systemDark
+                ? SystemUiOverlayStyle.dark
+                : SystemUiOverlayStyle.light,
+
             // backgroundColor: Colors.red,
             expandedHeight: MediaQuery.of(context).size.height * 0.25,
             flexibleSpace: FlexibleSpaceBar(
               title: LayoutBuilder(
                 builder: (context, constraints) {
+                  var isCompact = constraints.maxHeight >
+                      MediaQuery.of(context).size.height * 0.14;
+                  WidgetsBinding.instance.addPostFrameCallback((_) {
+
+                    if (isCompact) {
+                      setState(() {
+                        systemDark = false;
+                      });
+                    } else {
+                      setState(() {
+                        systemDark = true;
+                      });
+                    }
+                  });
+
                   return Text(
-                    recipe?.name??'',
-                    style:TextStyle(
-                      color: constraints.maxHeight > MediaQuery.of(context).size.height*0.14 ? Colors.white : Colors.black,
+                    recipe?.name ?? '',
+                    style: TextStyle(
+                      color: isCompact
+                          ? Colors.white
+                          : Colors.black,
                     ),
                   );
                 },
