@@ -28,6 +28,17 @@ class _DetailsState extends State<Details> {
             systemOverlayStyle: systemDark
                 ? SystemUiOverlayStyle.dark
                 : SystemUiOverlayStyle.light,
+            leading: Padding(
+              padding: const EdgeInsets.only(bottom: 16.0),
+              child: IconButton(
+                onPressed: (){
+                  Navigator.pop(context);
+                },
+                icon: Icon(
+                  Icons.arrow_back,color: systemDark? Colors.black: Colors.white,
+                ),
+              ),
+            ),
 
             // backgroundColor: Colors.red,
             expandedHeight: MediaQuery.of(context).size.height * 0.25,
