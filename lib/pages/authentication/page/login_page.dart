@@ -83,7 +83,7 @@ class _LogInPageState extends State<LogInPage> {
                   ),
                   TextField(
                     controller: _password,
-                    keyboardType: TextInputType.emailAddress,
+                    keyboardType: TextInputType.visiblePassword,
                     enableSuggestions: false,
                     autocorrect: false,
                     decoration: InputDecoration(

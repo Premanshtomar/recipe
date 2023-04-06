@@ -31,11 +31,12 @@ class _DetailsState extends State<Details> {
             leading: Padding(
               padding: const EdgeInsets.only(bottom: 16.0),
               child: IconButton(
-                onPressed: (){
+                onPressed: () {
                   Navigator.pop(context);
                 },
                 icon: Icon(
-                  Icons.arrow_back,color: systemDark? Colors.black: Colors.white,
+                  Icons.arrow_back,
+                  color: systemDark ? Colors.black : Colors.white,
                 ),
               ),
             ),
@@ -48,7 +49,6 @@ class _DetailsState extends State<Details> {
                   var isCompact = constraints.maxHeight >
                       MediaQuery.of(context).size.height * 0.14;
                   WidgetsBinding.instance.addPostFrameCallback((_) {
-
                     if (isCompact) {
                       setState(() {
                         systemDark = false;
@@ -63,9 +63,7 @@ class _DetailsState extends State<Details> {
                   return Text(
                     recipe?.name ?? '',
                     style: TextStyle(
-                      color: isCompact
-                          ? Colors.white
-                          : Colors.black,
+                      color: isCompact ? Colors.white : Colors.black,
                     ),
                   );
                 },
